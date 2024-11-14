@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en-us">
+ 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Density Ruler</title>
+ 
+<style>
+* {
+	box-sizing: border-box;
+}
+body {
+	background-color: #43A047;
+}
+section {
+	display: flex;
+	justify-content: center;
+}
+#mainContent {
+    background-color: #004F8A;
+    border-radius: 4px;
+    width: 50%;
+    height: 590px;
+	position: relative;
+}
+#subContent {
+    background-color: #87CEEB;
+	background-image: linear-gradient(to bottom right, #cfecf7, #62c1e5);
+    border-radius: 4px;
+    width: 100%;
+    height: 200px;
+	z-index: 10px;
+	position: relative;
+}
+#grad1 {
+	height: 390px;
+	background-color: blue; /* For browsers that do not support gradients */
+	background-image: linear-gradient(#0066B3, #000910);
+	opacity: 0.5;
+    border-radius: 4px;
+}
+#sidebar {
+	width: 49%;
+	float: right;
+	position: relative;
+    background-color: #483c32;
+    height: 590px;
+    border-radius: 4px;
+    padding: 10px;
+}
+#information {
+	text-align: center;
+	color: white;
+	font-family: Arial;
+}
+.button {
+	background-color: #04AA6D;
+	border: none;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+    border-radius: 4px;
+	height: 56px;
+}
+#helpButton {
+	background-color: #04AA6D;
+	border: none;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+    border-radius: 50%;
+	height: 10%;
+	position: absolute;
+	left: 85%;
+	top: 2%;
+}
+#circle {
+	position: absolute;
+    background: red;
+    border-radius: 50%;
+    width: 10vw;
+    height: 10vw;
+    top: calc(34% - 5vw);
+    left: calc(50% - 5vw);
+	animation: bobble 5s infinite;
+    transition: top 4s cubic-bezier(.42,-0.3,.78,1.25);
+}
+#sun {
+	position: absolute;
+    background: #FFE484;
+    border-bottom-right-radius: 100%;
+    width: 10vw;
+    height: 10vw;
+    top: 0px;
+    left: 0px;
+}
+#bigCloud {
+	position: absolute;
+    top: 10px;
+    left: 70%;
+    width: 120px;
+    height: 80px;
+	animation: bobble 8s infinite;
+}
+#smallCloud {
+	position: absolute;
+    top: 38px;
+    left: 77%;
+    width: 80px;
+    height: 50px;
+	animation: bobble 8s infinite;
+}
+#fish {
+	position: absolute;
+    width: 100px;
+    height: 70px;
+    top: 39%;
+    left: 10%;
+	animation: bobble 6s infinite;
+	animation-delay: 1s;
+}
+#shark {
+	position: absolute;
+    width: 220px;
+    height: 140px;
+    top: 55%;
+    left: 60%;
+	animation: bobble 4s infinite;
+	animation-delay: 2s;
+}
+#angler {
+	position: absolute;
+    width: 90px;
+    height: 60px;
+    top: 80%;
+    left: 20%;
+	animation: bobble 7s infinite;
+}
+#seaweed {
+	position: absolute;
+    width: 60px;
+    height: 40px;
+	top: calc(100% - 40px);
+}
+img {
+	width: 60%;
+	height: 220px;
+}
+h1 {
+	color: white;
+	letter-spacing: 1px;
+}
+@keyframes bobble {
+    0% {
+        transform: translateY(+5px);
+        animation-timing-function: ease-in;
+    }
+     
+    50% {
+        transform: translateY(-5px);
+        animation-timing-function: ease-out;
+    }
+     
+    100% {
+        transform: translateY(+5px);
+        animation-timing-function: ease-in;
+    }
+}
+@media only screen and (max-width: 500px) {
+	#mainContent {
+		width: 100%;
+		height: 75vh;
+	}
+	#subContent {
+		width: 100%;
+		height: 34%;
+	}
+	#sidebar {
+		width: 100%;
+		top: 76vh;
+		height: 30%;
+	}
+	#circle {
+		width: 10vw;
+		height: 10vw;
+		top: calc(34% - 5vw);
+		left: calc(50% - 5vw);
+	}
+	img {
+		width: 80%;
+		height: 20%;
+	}
+	#grad1 {
+		height: calc(75vh - 34%);
+	}
+	#smallCloud {
+		left: 80%;
+	}
+	#fish {
+		width: 80px;
+		height: 50px;
+	}
+	#shark {
+		width: 120px;
+		height: 75px;
+		top: 60%;
+		left: 70%;
+	}
+	#angler {
+		width: 60px;
+		height: 40px;
+	}
+	#helpButton {
+		left: 83%;
+		top: 1%;
+	}
+}
+
+</style>
+</head>
+ 
+<body>
+	<alert>
+    <aside id="sidebar">
+		<article id ="information"><h2>Styrofoam</h2><img src="densityruler/styrofoam.jpeg"></img>
+		<p>Berat bola sekarang mendekati Styrofoam dengan densitas mendekati 75 kg/m^3. <br><br>
+		Apakah Anda tahu? Dibutuhkan lebih dari 500 tahun untuk mendekomposisi styrofoam dan 17.2% dari semua sampah plastik di laut berupa styrofoam.</p></article>
+		<section><h1>Densitas Sekarang: <b id="density">100</b> kg/m^3</h1></section>
+		<section>
+			<button class="button" onclick="denseadd(-100)">-100</button>
+			<button class="button" onclick="denseadd(-10)">-10</button>
+			<button class="button" onclick="denseadd(-1)">-1</button>
+			<button class="button" onclick="denseadd(1)">+1</button>
+			<button class="button" onclick="denseadd(10)">+10</button>
+			<button class="button" onclick="denseadd(100)">+100</button>
+		</section>
+		<button id="helpButton" onclick="help()">Help</button>
+	</aside>
+	
+    <main id="mainContent">
+		<div id="subContent"><div id="sun"></div><img src="densityruler/bigCloud.png" id="bigCloud"><img src="smallCloud.png" id="smallCloud"></div>
+		<div id="circle"></div>
+		<img src="densityruler/fish.png" id="fish">
+		<img src="densityruler/shark.png" id="shark">
+		<img src="densityruler/angler.png" id="angler">
+		<img src="densityruler/seaweed.gif" id="seaweed" style="left:10%;top:calc(100% - 60px);height:60px;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:25%;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:40%;">
+		<img src="densityruler/seaweed.gif" id="seaweed" style="left:55%;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:70%;top:calc(100% - 60px);height:60px;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:85%;">
+		<img src="densityruler/seaweed.gif" id="seaweed" style="left:11%;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:47%;top:calc(100% - 60px);height:60px;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:78%;">
+		<div id="grad1"></div>
+    </main>
+	
+	
+	
+  <script>
+    // accessing the elements from our page
+    var density = document.querySelector("density");
+    var circle = document.querySelector("#circle");
+	const info = document.getElementById("information");
+
+    // listening to a click event on the button
+    // buttonElement.addEventListener("click", add10, false);
+
+    // what gets called when the button is clicked
+	function help() {
+		alert("Tekan tombol angka di layar untuk menambah atau mengurangi densitas!");
+	}
+	function denseadd(val) {
+		var x = document.getElementById("density");
+		var y = Number(x.innerHTML) + Number(val);
+		if (y < 0) {
+			y = 0;
+		}
+		x.innerHTML = y;
+		if (y < 2) {
+			circle.style.setProperty('top', '1%');
+			info.innerHTML= '<h2>Hidrogen</h2><img src="densityruler/hydrogen.jfif"></img><p>Bola melayang di udara karena densitas bola lebih kecil dari densitas udara bahkan melewati gas hidrogen dengan densitas disekitar 0.089 kg/m^3.<br><br>Apakah Anda tahu? Hidrogen adalah elemen yang paling melimpah di alam semesta tetapi cukup langka di bumi.</p>';
+		} else if (y < 1000 && y>1) {
+			circle.style.setProperty('top', 'calc(34% - 5vw)');
+			if (y > 1 && y < 200) {
+				info.innerHTML= '<h2>Styrofoam</h2><img src="densityruler/styrofoam.jpeg"></img><p>Bola sedang mengapung dengan kepadatan mendekati Styrofoam yang berdensitas mendekati 75 kg/m^3.<br><br>Apakah Anda tahu? Dibutuhkan lebih dari 500 tahun untuk mendekomposisi styrofoam dan 17.2% dari semua sampah plastik di laut berupa styrofoam.</p>';
+			} else if (y > 500 && y < 800) {
+				info.innerHTML= '<h2>Kayu</h2><img src="densityruler/kayu.jpg"></img><p>Bola sedang mengapung dengan kepadatan seperti kayu yang berdensitas disekitar 700 kg/m^3.<br><br>Apakah Anda tahu? Kayu yang paling sering dipakai di dunia adalah kayu ek yang tidak hanya digunakan untuk membuat perabotan tetapi juga sebagai bahan bangunan.</p>';
+			} else if (y > 800) {
+				info.innerHTML= '<h2>Minyak Goreng</h2><img src="densityruler/minyak.jpg"></img><p>Bola mengapung karena memiliki kepadatan setingkat dengan minyak goreng yang berdensitas mendekati 910 kg/m^3.<br><br>Apakah Anda tahu? Berdasarkan penelitian di tahun 2022 masyarakat Indonesia menggunakan sebanyak 2.65 juta ton minyak goreng.</p>';
+			}
+		} else if (y >= 1000 && y <= 1030) {
+			circle.style.setProperty('top', 'calc(66% - 5vw)');
+			info.innerHTML= '<h2>Air</h2><img src="densityruler/water.jpeg"></img><p>Bola sedang melayang di air karena densitas bola sama dengan densitas air disekitar 1000 kg/m^3.<br><br>Apakah Anda tahu? Karena konsentrasi garam, air laut memiliki densitas sekitar 3% lebih besar daripada air tawar.</p>';
+		} else if (y > 1030) {
+			circle.style.setProperty('top', 'calc(99% - 10vw)');
+			if (y > 1030 && y < 1700) {
+				info.innerHTML= '<h2>Pasir</h2><img src="densityruler/pasir.jfif"></img><p>Bola tenggelam dengan kepadatan mendekati Pasir yang berdensitas 1600 kg/m^3.<br><br>Apakah Anda tahu? Pasir terbentuk sebagian besar dari kristal erosi berbatuan tetapi juga memiliki sebagian pecahan kerang, pecahan koral dan tinja ikan.</p>';
+			} else if (y > 2000 && y < 2500) {
+				info.innerHTML= '<h2>Beton</h2><img src="densityruler/beton.png"></img><p>Bola tenggelam karena sudah sepadat beton yang berdensitas disekitar 2400 kg/m^3.<br><br>Apakah Anda tahu? Beton tidak sama dengan semen, beton terbentuk dari 15% semen, 65% pasir dan 20% air.</p>';
+			} else if (y > 2500 && y < 2800) {
+				info.innerHTML= '<h2>Aluminium</h2><img src="densityruler/aluminium.jpg"></img><p>Bola tenggelam karena memiliki kepadatan setingkat dengan aluminium dengan densitas mendekati 2700 kg/m^3.<br><br>Apakah Anda tahu? Aluminium adalah logam yang paling melimpah, cukup ringan dan dapat di daur ulang berkali-kali sehinga pemakaiannya pun juga melimpah.</p>';
+			} else if (y > 3200 && y < 3600) {
+				info.innerHTML= '<h2>Berlian</h2><img src="densityruler/berlian.jpeg"></img><p>Bola tenggelam karena memiliki kepadatan setingkat denganberlian yang berdensitas mendekati 3500 kg/m^3.<br><br>Apakah Anda tahu? Cincin berlian pada awalnya bukanlah hal yang wajar dalam pernikahan, konsep cincin berlian pernikahan tersebut berasal dari iklan De Beers sebuah perusahaan berlian pada tahun 1947.</p>';
+			} else if (y > 3600) {
+				info.innerHTML= '<h3>STOP</h3><img src="densityruler/stop.jfif"></img><p>Bola tenggelam dan developer belum bisa menambah fakta-fakta lainnya.<br><br>Apakah Anda tahu? Sebagian besar elemen yang lebih padat dari ini berupa logam (dalam kg/m^3) seperti besi (7870), tembaga (8940), perak (10500), emas (19840) dan osmium (22570) sebagai elemen natural paling padat. <br><b>ps: tidak perlu menambah densitas lagi</b></p>';
+			}
+		}
+	}
+
+  </script>
+</body>
+ 
+</html>
