@@ -1,1 +1,6 @@
-["Spongebob", "Patrick"]
+{
+    "users": {
+        "Spongebob": {"density": 0},
+        "Patrick": {"density": 1000}
+    }
+}
