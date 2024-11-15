@@ -207,6 +207,25 @@ h1 {
 #lab {
 	visibility: visible;
 }
+#progressbar {
+	display: flex;
+	align-items: center;
+	height: 1%;
+	width: 49.5%;
+	position: absolute;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    padding: 10px;
+	z-index: 1;
+}
+#progress {
+	height: 100%;
+	width: calc((100/3400)*100%);
+	position: absolute;
+    background-color: #87CEEB;
+	background-image: linear-gradient(to bottom right, #eca547, #3ef7de);
+	z-index: 1;
+}
 @keyframes bobble {
     0% {
         transform: translateY(+5px);
@@ -290,7 +309,7 @@ h1 {
 </head>
  
 <body>
-	<alert></alert>
+	<progressbar id="progressbar"><progressbar id="progress"></progressbar></progressbar>
 	<lab id="lab">
 		<aside id="sidebar">
 			<article id ="information"><h2>Selamat Datang</h2><img src="densityruler/red-ball.gif"></img>
@@ -386,6 +405,7 @@ h1 {
 				y = 0;
 			}
 			x.innerHTML = y;
+			document.getElementById("progress").style.width = "calc((y/3400)*100%)";
 			if (y < 2) {
 				circle.style.setProperty('top', '1%');
 				info.innerHTML= '<h2>Hidrogen</h2><img src="densityruler/hydrogen.jfif"></img><p>Bola melayang di udara karena densitas bola lebih kecil dari densitas udara bahkan melewati gas hidrogen dengan densitas disekitar 0.089 kg/m^3.<br><br>Apakah Anda tahu? Hidrogen adalah elemen yang paling melimpah di alam semesta tetapi cukup langka di bumi.</p>';
