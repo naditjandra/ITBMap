@@ -1,478 +1,383 @@
 <!DOCTYPE html>
 <html lang="en-us">
- 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Density Ruler</title>
- 
-<style>
-* {
-	box-sizing: border-box;
-}
-body {
-	background-color: #43A047;
-}
-section {
-	display: flex;
-	justify-content: center;
-}
-#mainContent {
-    background-color: #004F8A;
-    border-radius: 4px;
-    width: 50%;
-    height: 590px;
-	position: relative;
-}
-#subContent {
-    background-color: #87CEEB;
-	background-image: linear-gradient(to bottom right, #cfecf7, #62c1e5);
-    border-radius: 4px;
-    width: 100%;
-    height: 200px;
-	z-index: 10px;
-	position: relative;
-}
-#grad1 {
-	height: 390px;
-	background-color: blue; /* For browsers that do not support gradients */
-	background-image: linear-gradient(#0066B3, #000910);
-	opacity: 0.5;
-    border-radius: 4px;
-}
-#sidebar {
-	width: 49%;
-	float: right;
-	position: relative;
-    background-color: #483c32;
-    height: 590px;
-    border-radius: 4px;
-    padding: 10px;
-}
-#information {
-	text-align: center;
-	color: white;
-	font-family: Arial;
-}
-.button {
-	background-color: #04AA6D;
-	border: none;
-	color: white;
-	padding: 20px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
-    border-radius: 4px;
-	height: 56px;
-}
-#loginButton {
-	background-color: #04AA6D;
-	border: none;
-	color: white;
-	padding: 20px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
-    border-radius: 50%;
-	height: 10%;
-	position: absolute;
-	left: 85%;
-	top: 2%;
-}
-#registerButton {
-	background-color: #04AA6D;
-	border: none;
-	color: white;
-	padding: 20px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
-    border-radius: 50%;
-	height: 10%;
-	position: absolute;
-	left: 3%;
-	top: 2%;
-}
-#circle {
-	position: absolute;
-    background: red;
-    border-radius: 50%;
-    width: 10vw;
-    height: 10vw;
-    top: calc(34% - 5vw);
-    left: calc(50% - 5vw);
-	animation: bobble 5s infinite;
-    transition: top 4s cubic-bezier(.42,-0.3,.78,1.25);
-}
-#sun {
-	position: absolute;
-    background: #FFE484;
-    border-bottom-right-radius: 100%;
-    width: 10vw;
-    height: 10vw;
-    top: 0px;
-    left: 0px;
-}
-#bigCloud {
-	position: absolute;
-    top: 10px;
-    left: 70%;
-    width: 120px;
-    height: 80px;
-	animation: bobble 8s infinite;
-}
-#smallCloud {
-	position: absolute;
-    top: 38px;
-    left: 77%;
-    width: 80px;
-    height: 50px;
-	animation: bobble 8s infinite;
-}
-#fish {
-	position: absolute;
-    width: 100px;
-    height: 70px;
-    top: 39%;
-    left: 10%;
-	animation: bobble 6s infinite;
-	animation-delay: 1s;
-}
-#shark {
-	position: absolute;
-    width: 220px;
-    height: 140px;
-    top: 55%;
-    left: 60%;
-	animation: bobble 4s infinite;
-	animation-delay: 2s;
-}
-#angler {
-	position: absolute;
-    width: 90px;
-    height: 60px;
-    top: 80%;
-    left: 20%;
-	animation: bobble 7s infinite;
-}
-#seaweed {
-	position: absolute;
-    width: 60px;
-    height: 40px;
-	top: calc(100% - 40px);
-}
-img {
-	width: 60%;
-	height: 220px;
-}
-h1 {
-	color: white;
-	letter-spacing: 1px;
-}
-#login {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 50%;
-	width: 50%;
-	top: 25%;
-	left: 25%;
-	position: absolute;
-    background-color: #FFFFFF;
-    border-radius: 4px;
-    padding: 10px;
-	z-index: 1;
-	visibility: hidden;
-}
-#register {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 50%;
-	width: 50%;
-	top: 25%;
-	left: 25%;
-	position: absolute;
-    background-color: #FFFFFF;
-    border-radius: 4px;
-    padding: 10px;
-	z-index: 1;
-	visibility: hidden;
-}
-#lab {
-	visibility: visible;
-}
-#progressbar {
-	display: flex;
-	align-items: center;
-	height: 1%;
-	width: 49.5%;
-	position: absolute;
-    background-color: #FFFFFF;
-    border-radius: 4px;
-    padding: 10px;
-	z-index: 1;
-}
-#progress {
-	height: 100%;
-	width: calc((100/3400)*100%);
-	position: absolute;
-    background-color: #87CEEB;
-	background-image: linear-gradient(to bottom right, #eca547, #3ef7de);
-	z-index: 1;
-}
-@keyframes bobble {
-    0% {
-        transform: translateY(+5px);
-        animation-timing-function: ease-in;
-    }
-     
-    50% {
-        transform: translateY(-5px);
-        animation-timing-function: ease-out;
-    }
-     
-    100% {
-        transform: translateY(+5px);
-        animation-timing-function: ease-in;
-    }
-}
-@media only screen and (max-width: 500px) {
-	#mainContent {
-		width: 100%;
-		height: 75vh;
-	}
-	#subContent {
-		width: 100%;
-		height: 34%;
-	}
-	#sidebar {
-		width: 100%;
-		top: 76vh;
-		height: 30%;
-	}
-	#circle {
-		width: 14vw;
-		height: 14vw;
-		top: calc(34% - 7vw);
-		left: calc(50% - 7vw);
-	}
-	img {
-		width: 80%;
-		height: 20%;
-	}
-	#grad1 {
-		height: calc(75vh - 34%);
-	}
-	#bigCloud {
-		left: 62%;
-	}
-	#smallCloud {
-		left: 70%;
-	}
-	#fish {
-		width: 80px;
-		height: 50px;
-	}
-	#shark {
-		width: 120px;
-		height: 75px;
-		top: 60%;
-		left: 70%;
-	}
-	#angler {
-		width: 60px;
-		height: 40px;
-	}
-	#loginButton {
-		left: 77%;
-		top: 1%;
-	}
-	#registerButton {
-		left: 3%;
-		top: 1%;
-	}
-	.button {
-		padding: 17px 0;
-		text-align: center;
-		height: 50px;
-		width: 80px;
-	}
-}
-
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITB Map</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, button {
+            margin: 5px;
+        }
+        #mainContent {
+            background-image: url("map.jpg");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 1522px;
+            width: 1076px;
+            position: absolute;
+            visibility: visible;
+            flex-direction: column;
+        }
+        #search {
+            visibility: hidden;
+            background-color: #FFFFFF;
+            position: fixed;
+            top: 45%;
+            left: 25%;
+        }
+        #route {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background-color: #FFFFFF;
+            z-index: 1;
+            visibility: hidden;
+        }
+        #searchbutton{
+            background-color: #04AA6D;
+            width: 80px;
+            height: 80px;
+            top: 5%;
+            left: 8%;
+            position: fixed;
+            z-index: 1;
+            border-radius: 50%;
+        }
+        #button1{
+            left: 617px;
+            top: 1365px;
+            position: absolute;
+            background-color: #5100ff;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        #button2{
+            left: 618px;
+            top: 1308px;
+            position: absolute;
+            background-color: #f100fd;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        #button3{
+            left: 708px;
+            top: 1121px;
+            position: absolute;
+            background-color: #abcd67;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .line {
+            position: absolute;
+            background-color: black;
+        }
+    </style>
 </head>
- 
 <body>
-	<progressbar id="progressbar"><progressbar id="progress"></progressbar></progressbar>
-	<lab id="lab">
-		<aside id="sidebar">
-			<article id ="information"><h2>Selamat Datang</h2><img src="densityruler/red-ball.gif"></img>
-			<p>Sebuah bola sedang bergelinding menuju lautan, lihatlah bagaimana kondisi bola tersebut apabila kita memiliki kendali atas densitasnya. <br>
-			Tekan tombol tambah dan kurang dibawah untuk mengatur densitas, gunakan tombol register untuk menyimpan akun dan tombol login untuk membuka progres akun.</p></article>
-			<section><h1>Densitas Bola <b id="identity">Anda</b> Sekarang: <b id="density">100</b> kg/m^3</h1></section>
-			<section>
-				<button class="button" onclick="denseadd(-100)">-100</button>
-				<button class="button" onclick="denseadd(-10)">-10</button>
-				<button class="button" onclick="denseadd(-1)">-1</button>
-				<button class="button" onclick="denseadd(1)">+1</button>
-				<button class="button" onclick="denseadd(10)">+10</button>
-				<button class="button" onclick="denseadd(100)">+100</button>
-			</section>
-			<button id="loginButton" onclick="login()">Login</button>
-			<button id="registerButton" onclick="register()">Register</button>
-		</aside>
-		
-		<main id="mainContent">
-			<div id="subContent"><div id="sun"></div><img src="densityruler/bigCloud.png" id="bigCloud"><img src="densityruler/smallCloud.png" id="smallCloud"></div>
-			<div id="circle"></div>
-			<img src="densityruler/fish.png" id="fish">
-			<img src="densityruler/shark.png" id="shark">
-			<img src="densityruler/angler.png" id="angler">
-			<img src="densityruler/seaweed.gif" id="seaweed" style="left:10%;top:calc(100% - 60px);height:60px;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:25%;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:40%;">
-			<img src="densityruler/seaweed.gif" id="seaweed" style="left:55%;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:70%;top:calc(100% - 60px);height:60px;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:85%;">
-			<img src="densityruler/seaweed.gif" id="seaweed" style="left:11%;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:47%;top:calc(100% - 60px);height:60px;"><img src="densityruler/seaweed.gif" id="seaweed" style="left:78%;">
-			<div id="grad1"></div>
-		</main>
-	</lab>
-	<account id="login">
-		<form id="loginForm">
-			<h3>Login / Load</h3>
-			<label for="username">Username</label><br>
-			<input type="username" placeholder="Username" id="username" required><br><br>
+	<main id="mainContent">
+        <button id="button1"></button>
+        <button id="button2"></button>
+        <button id="button3"></button>
+        <div id="search">
+        <h3>Masukkan titik awal dan titik akhir rute:</h3>
+        
+            <form id="routeForm">
+                <label for="start">Titik Awal : </label>
+                <input type="text" id="start" placeholder="e.g., B" required>
+                <br>
+                <label for="end">Titik Akhir: </label>
+                <input type="text" id="end" placeholder="e.g., E" required>
+                <br>
+                <button type="submit">Find Route</button>
+            </form>
+            <div id="route"></div>
+        </div>
+	</main>
 
-			<button id="submit1" type="submit">Login</button>
-		</form>
-	</account>
-	<account id="register">
-		<form id="registerForm">
-			<h3>Register / Save</h3>
-			<label for="username">Username</label><br>
-			<input type="username" placeholder="Username" id="username" required><br><br>
+    <button id="searchbutton" onclick="search()"></button>
 
-			<button id="submit2" type="submit">Create Account</button>
-		</form>
-	</account>
-	
-	
-	<script type="module">
-		// Import the functions you need from the SDKs you need
-		import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-		import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
-		// Your web app's Firebase configuration
-		const firebaseConfig = {
-			apiKey: "AIzaSyBfptLAYec8yv0JLxlmav4pNUFQPzWbGos",
-			authDomain: "destinyruler-7aa00.firebaseapp.com",
-			databaseURL: "https://destinyruler-7aa00-default-rtdb.asia-southeast1.firebasedatabase.app",
-			projectId: "destinyruler-7aa00",
-			storageBucket: "destinyruler-7aa00.firebasestorage.app",
-			messagingSenderId: "519578709315",
-			appId: "1:519578709315:web:e0f30410ad622c16b613f6"
-		};
+    <account id="login">
+        <form id="loginForm">
+            <h3>Login</h3>
+            <label for="username">Username</label><br>
+            <input type="text" placeholder="Username" id="username" required>
+            <br>
+            <label for="password">Password</label><br>
+            <input type="password" placeholder="Password" id="password" required>
+            <br><br>
+            <button type="submit" id="loginButton">Login</button>
+        </form>
+    </account>
+    <script>
+        // [name, visited, x, y, numberofneighbor, neighbornames, neighborcosts]
+        const Map = [
+            ["GERBANG UTAMA", 0, -6.933584517173751, 107.76832917329023, 1, "SHUTTLE STOP", null, null, null, 33.96, null, null, null],
+            ["SHUTTLE STOP", 0, -6.933271284479303, 107.76834012954798, 4, "GERBANG UTAMA", "PARKIR MOTOR DEPAN", "SITU 1", "S1", 33.96, 42.09, 78.50, 91.64],
+            ["PARKIR MOTOR DEPAN", 0, -6.933458267889836, 107.76803400537632, 1, "SHUTTLE STOP", null, null, null, 42.09, null, null, null],
+            ["SITU 1", 0, -6.933133191731161, 107.7690475469806, 2, "SHUTTLE STOP", "GERBANG KELUAR", null, null, 78.50, 97.95, null, null],
+            ["S1", 0, -6.932453923692397, 107.76844837264261, 3, "SHUTTLE STOP", "GEDUNG PARKIR", "PRASASTI", null, 91.64, 172.67, 84.25, null],
+            ["PRASASTI", 0, -6.9318074762661785, 107.76886909099147, 4, "S1", "GERBANG MASUK", "LAB METALURGI", "GERBANG KELUAR", 84.25, 96.49, 76.36, 88.17],
+            ["LAB METALURGI", 0, -6.931221730993531, 107.7689704942895, 2, "PRASASTI", "GREEN HERCULES", null, null, 76.36, 37.38, null, null],
+            ["GEDUNG PARKIR", 0, -6.931171774382397, 107.76828147111557, 2, "S1", "GERBANG MASUK", null, null, 172.67, 64.74, null, null],
+            ["GREEN HERCULES", 0, -6.93085695373151, 107.76878810407717, 2, "LAB METALURGI", "GERBANG MASUK", "PARKIR MOBIL 1", null, 37.38, 17.11, 48.24, null],
+            ["PARKIR MOBIL 1", 0, -6.930526790135296, 107.76865935804341, 2, "GREEN HERCULES", "S3", null, null, 48.24, 54.88, null, null],
+            ["S2", 0, -6.93036703347347, 107.76850110771021, 3, "GERBANG MASUK", "S4", "S3", null, 71.46, 138.73, 48.32, null],
+            ["GERBANG MASUK", 0, -6.930987421540462, 107.7686727690886, 4, "PRASASTI", "GEDUNG PARKIR", "GREEN HERCULES", "S2", 96.49, 64.74, 17.11, 71.46],
+            ["S3", 0, -6.930091583165635, 107.76883772251918, 4, "S2", "GKU 2", "S13", "PARKIR MOBIL 1", 48.32, 73.66, 175.14, 54.88],
+            ["S4", 0, -6.929427882599676, 107.76827965013273, 4, "S2", "LAB TPSDA", "S5", "LABTEK 1B", 138.73, 69.86, 153.90, 35.51],
+            ["LAB TPSDA", 0, -6.929148719125287, 107.76787816211903, 2, "S4", "SITU 2", null, null, 35.86, 107.87, null, null],
+            ["SITU 2", 0, -6.928762726994298, 107.76695724429304, 2, "LAB TPSDA", "WATER TREATMENT PLANT", null, null, 107.87, 201.31, null, null],
+            ["S5", 0, -6.928252915171161, 107.76758111001531, 4, "S4", "WATER TREATMENT PLANT", "ASRAMA TB5", "S6", 121.90, 187.11, 31.82, 86.05],
+            ["WATER TREATMENT PLANT", 0, -6.9288133275483705, 107.76752443734549, 2, "S5", "SITU 2", null, null, 187.11, 201.31, null, null],
+            ["ASRAMA TB5", 0, -6.928049116249143, 107.76780929301167, 2, "S5", "J5", null, null, 31.82, 131.98, null, null],
+            ["S6", 0, -6.927496509079784, 107.76755243706123, 4, "S5", "LABTEK 2A", "S7", "LABTEK 2B", 86.05, 52.31, 153.71, 46.06],
+            ["S7", 0, -6.926306533387978, 107.76819533588264, 4, "S6", "SARAGA", "S8", "ASRAMA ITB", 153.71, 14.94, 65.43, 50.10],
+            ["SARAGA", 0, -6.926238670764719, 107.76810454476175, 1, "S7", null, null, null, 14.94, null, null, null],
+            ["ASRAMA ITB", 0, -6.9266745045739375, 107.76849439084127, 2, "S7", "S9", null, null, 50.10, 68.04, null, null],
+            ["S8", 0, -6.925933764433394, 107.76863790037527, 3, "S7", "S9", "GOR", null, 65.43, 68.21, 41.37, null],
+            ["GOR", 0, -6.925703843571441, 107.76892819891506, 1, "S8", null, null, null, 41.37, null, null, null],
+            ["S9", 0, -6.926388452551197, 107.76902787509698, 3, "S8", "S10", "ASRAMA ITB", null, 68.21, 36.36, 68.04, null],
+            ["S10", 0, -6.926498243039143, 107.76926017286321, 4, "S9", "GSG", "S11", "J9", 36.36, 33.08, 132.45, 81.82],
+            ["GSG", 0, -6.9262976135275505, 107.76948770685297, 1, "S10", null, null, null, 33.08, null, null, null],
+            ["S11", 0, -6.9274035375248735, 107.77002728464568, 4, "S10", "GKU 3", "GEDUNG REKTORAT", "KOICA", 132.45, 15.77, 101.61, 19.19],
+            ["GKU 3", 0, -6.927328028258193, 107.77013387960343, 1, "S11", null, null, null, 15.77, null, null, null],
+            ["GEDUNG REKTORAT", 0, -6.928067534298892, 107.77051261323894, 4, "S11", "S12", "GKU 1", "KOICA", 101.61, 50, 136.27, 87.65],
+            ["GKU 1", 0, -6.92894522111579, 107.76965475525834, 4, "S13", "GEDUNG REKTORAT", "J1", "J3", 61.85, 136.27, 48.28, 52.83],
+            ["J3", 0, -6.928598890838067, 107.76935486340409, 4, "GKU 1", "GEDUNG E", "J4", "GEDUNG D", 52.83, 14.26, 71.28, 14.83],
+            ["J1", 0, -6.929018180205202, 107.76930597292552, 3, "GKU 1", "GKU 2", "J5", null, 48.28, 95.03, 106.22, null],
+            ["GKU 2", 0, -6.929621175305118, 107.7689061280335, 3, "J1", "S3", "LABTEK 1B", null, 95.03, 73.66, 63.94, null],
+            ["LABTEK 1B", 0, -6.929310052311496, 107.76860592404235, 3, "GKU 2", "S4", "LABTEK 1A", null, 63.94, 35.51, 102.37, null],
+            ["LABTEK 1A", 0, -6.928559279701188, 107.76806170891919, 2, "LABTEK 1B", "J5", null, null, 102.37, 91.75, null, null],
+            ["GEDUNG E", 0, -6.928689031618207, 107.76926883864792, 1, "J3", null, null, null, 14.26, null, null, null],
+            ["GEDUNG D", 0, -6.928489773027104, 107.76944566731308, 1, "J3", null, null, null, 14.83, null, null, null],
+            ["J4", 0, -6.928110915059178, 107.76892140499295, 4, "J3", "PEREMPATAN", "J5", "J7", 71.28, 1.75, 35.53, 70.23],
+            ["J7", 0, -6.927640112747453, 107.76849143944163, 3, "J4", "GEDUNG B", "J8", null, 70.23, 13.33, 38.64, null],
+            ["GEDUNG B", 0, -6.927553454022967, 107.76858915888533, 1, "J7", null, null, null, 13.33, null, null, null],
+            ["J8", 0, -6.92738013653892, 107.76828297129813, 4, "J7", "LABTEK 2B", "LABTEK 2A", "J9", 38.64, 80.44, 83.85, 64.46],
+            ["J9", 0, -6.926985778646541, 107.76871620303973, 3, "J8", "AMPHITEATER", "S10", null, 64.46, 41.17, 81.82, null],
+            ["AMPHITEATER", 0, -6.927212692272924, 107.76899957414061, 1, "J9", null, null, null, 41.17, null, null, null],
+            ["LABTEK 2A", 0, -6.92746456044227, 107.76794928600866, 3, "J7", "S6", "LABTEK 2B", null, 83.85, 52.31, 22.35, null],
+            ["LABTEK 2B", 0, -6.927297352527733, 107.76778984441228, 3, "J7", "S6", "LABTEK 2A", null, 80.44, 46.06, 22.35, null],
+            ["J5", 0, -6.928335968741495, 107.76866081981053, 4, "J4", "LABTEK 1A", "J1", "ASRAMA TB5", 35.35, 91.75, 106.22, 131.98],
+            ["PEREMPATAN", 0, -6.928107382538412, 107.76890270866997, 4, "J4", "MUSHOLA AL-WASHAT", "LAB KRIYA", "J6", 1.75, 19, 14.23, null],
+            ["J6", 0, -6.9277902031896375, 107.76925082689598, 4, "PEREMPATAN", "GEDUNG C", "GEDUNG A", "KOICA", 52.72, 24.54, 19.74, 113.6],
+            ["KOICA", 0, -6.927573401345199, 107.76997388105637, 3, "J6", "S11", "GEDUNG REKTORAT", null, 113.6, 19.19, 87.65, null],
+            ["GEDUNG C", 0, -6.927949271093874, 107.76941491468564, 1, "J6", null, null, null, 24.54, null, null, null],
+            ["GEDUNG A", 0, -6.927668633532669, 107.76913449294744, 1, "J6", null, null, null, 19.74, null, null, null],
+            ["MUSHOLA AL-WASHAT", 0, -6.928234818910585, 107.76891142436902, 1, "PEREMPATAN", null, null, null, 19, null, null, null],
+            ["LAB KRIYA", 0, -6.928027134227982, 107.76894294032478, 1, "PEREMPATAN", null, null, null, 14.23, null, null, null],
+            ["S12", 0, -6.928270565492832, 107.7708424355865, 4, "GEDUNG REKTORAT", "GERBANG SAMPING", "J2", "S13", 50, 17.7, 358.01, 123.10],
+            ["GERBANG SAMPING", 0, -6.928217698621876, 107.77098550283374, 1, "S12", null, null, null, 17.7, null, null, null],
+            ["J2", 0, -6.931397462994927, 107.7713710713549, 4, "S12", "LABTEK V", "GERBANG BELAKANG", "PARKIR MOTOR BELAKANG", 358.01, 30.48, 14.43, 15.29],
+            ["GERBANG BELAKANG", 0, -6.931436084379142, 107.7714550872038, 1, "J2", null, null, null, 14.43, null, null, null],
+            ["LABTEK V", 0, -6.93147347733977, 107.77108809588893, 3, "J2", "PARKIR MOTOR BELAKANG", "S15", null, 30.48, 22.6, 34, null],
+            ["PARKIR MOTOR BELAKANG", 0, -6.931585306746227, 107.77125707505827, 3, "J2", "MUSEUM ZOOLOGI", "LABTEK V", null, 15.29, 41.22, 22.6, null],
+            ["MUSEUM ZOOLOGI", 0, -6.931960733845238, 107.77122757075887, 1, "PARKIR MOTOR BELAKANG", null, null, null, 41.22, null, null, null],
+            ["S13", 0, -6.929046611974593, 107.77004504493277, 4, "S12", "GKU 1", "S3", "S14", 123.10, 61.85, 175.14, 118.35],
+            ["S14", 0, -6.930045123212628, 107.77035774715168, 4, "S13", "TPA", "S15", "PARKIR MOBIL 2", 118.35, 10.74, 156.71, 8.39],
+            ["TPA", 0, -6.930070282271186, 107.77047118781346, 1, "S14", null, null, null, 10.74, null, null, null],
+            ["PARKIR MOBIL 2", 0, -6.9300889205629215, 107.77029684422605, 1, "S14", null, null, null, 8.39, null, null, null],
+            ["S15", 0, -6.9314109590248085, 107.77076426002955, 4, "S14", "LABTEK V", "S16", "RUANG BACA", 156.71, 34, 239.16, 8.10],
+            ["RUANG BACA", 0, -6.93143353825329, 107.77070185778835, 1, "S15", null, null, null, 8.10, null, null, null],
+            ["S16", 0, -6.932586445018031, 107.76968798277342, 4, "S15", "GERBANG KELUAR", "ASRAMA DOSEN", null, 239.16, 35.59, 67.37, null],
+            ["ASRAMA DOSEN", 0, -6.9322110184258605, 107.77016541599048, 1, "S16", null, null, null, 67.37, null, null, null],
+            ["GERBANG KELUAR", 0, -6.932349473660864, 107.76946535943179, 3, "S16", "SITU 1", "PRASASTI", null, 35.39, 97.95, 88.17, null],
+        ];
 
-		// Initialize Firebase
-		const app = initializeApp(firebaseConfig);
+        function getRow(string){
+            for (let i = 0; i < Map.length; i++) {
+                if (string === Map[i][0]) {
+                    return i;
+                }
+            }
+        }
 
-		// accessing the elements from our page
-		var density = document.querySelector("density");
-		var circle = document.querySelector("#circle");
-		const info = document.getElementById("information");
-		const username = document.getElementById('username');
-		const submit = document.getElementById('submit');
+        function distance(st, en){
+            return Math.hypot(Math.abs(Map[en][2] - Map[st][2]), Math.abs(Map[en][3] - Map[st][3]));
+        }
 
-		submit1.addEventListener("click", function (event) {
-			document.getElementById("lab").style.visibility = "visible";
-			document.getElementById("login").style.visibility = "hidden";
-		})
+        function toMeter(x) {
+            return x * 111139;  // 111139
+        }
 
-		submit2.addEventListener("click", function (event) {
-			document.getElementById("lab").style.visibility = "visible";
-			document.getElementById("register").style.visibility = "hidden";
-		})
+        function setVisit(row) {
+            Map[row][1] = 1;
+        }
 
-		function login() {
-			readUserData(username);
-			document.getElementById("identity").innerHTML = username;
-			document.getElementById("loginForm").reset();
-			document.getElementById("lab").style.visibility = "hidden";
-			document.getElementById("login").style.visibility = "visible";
-		}
+        function resetVisit() {
+            for (let i = 0; i < Map.length; i++) {
+                Map[i][1] = 0;
+            }
+        }
 
-		function register() {
-			writeUserData(username, document.getElementById("density").innerHTML);
-			document.getElementById("identity").innerHTML = username;
-			document.getElementById("registerForm").reset();
-			document.getElementById("lab").style.visibility = "hidden";
-			document.getElementById("register").style.visibility = "visible";
-		}
-		
-		function denseadd(val) {
-			var x = document.getElementById("density");
-			var y = Number(x.innerHTML) + Number(val);
-			if (y < 0) {
-				y = 0;
-			}
-			x.innerHTML = y;
-			document.getElementById("progress").style.width = "calc((y/3400)*100%)";
-			if (y < 2) {
-				circle.style.setProperty('top', '1%');
-				info.innerHTML= '<h2>Hidrogen</h2><img src="densityruler/hydrogen.jfif"></img><p>Bola melayang di udara karena densitas bola lebih kecil dari densitas udara bahkan melewati gas hidrogen dengan densitas disekitar 0.089 kg/m^3.<br><br>Apakah Anda tahu? Hidrogen adalah elemen yang paling melimpah di alam semesta tetapi cukup langka di bumi.</p>';
-			} else if (y < 1000 && y>1) {
-				circle.style.setProperty('top', 'calc(34% - 5vw)');
-				if (y > 1 && y < 200) {
-					info.innerHTML= '<h2>Styrofoam</h2><img src="densityruler/styrofoam.jpeg"></img><p>Bola sedang mengapung dengan kepadatan mendekati Styrofoam yang berdensitas mendekati 75 kg/m^3.<br><br>Apakah Anda tahu? Dibutuhkan lebih dari 500 tahun untuk mendekomposisi styrofoam dan 17.2% dari semua sampah plastik di laut berupa styrofoam.</p>';
-				} else if (y > 500 && y < 800) {
-					info.innerHTML= '<h2>Kayu</h2><img src="densityruler/kayu.jpg"></img><p>Bola sedang mengapung dengan kepadatan seperti kayu yang berdensitas disekitar 700 kg/m^3.<br><br>Apakah Anda tahu? Kayu yang paling sering dipakai di dunia adalah kayu ek yang tidak hanya digunakan untuk membuat perabotan tetapi juga sebagai bahan bangunan.</p>';
-				} else if (y > 800) {
-					info.innerHTML= '<h2>Minyak Goreng</h2><img src="densityruler/minyak.jpg"></img><p>Bola mengapung karena memiliki kepadatan setingkat dengan minyak goreng yang berdensitas mendekati 910 kg/m^3.<br><br>Apakah Anda tahu? Berdasarkan penelitian di tahun 2022 masyarakat Indonesia menggunakan sebanyak 2.65 juta ton minyak goreng.</p>';
-				}
-			} else if (y >= 1000 && y <= 1030) {
-				circle.style.setProperty('top', 'calc(66% - 5vw)');
-				info.innerHTML= '<h2>Air</h2><img src="densityruler/water.jpeg"></img><p>Bola sedang melayang di air karena densitas bola sama dengan densitas air disekitar 1000 kg/m^3.<br><br>Apakah Anda tahu? Karena konsentrasi garam, air laut memiliki densitas sekitar 3% lebih besar daripada air tawar.</p>';
-			} else if (y > 1030) {
-				circle.style.setProperty('top', 'calc(99% - 10vw)');
-				if (y > 1030 && y < 1700) {
-					info.innerHTML= '<h2>Pasir</h2><img src="densityruler/pasir.jfif"></img><p>Bola tenggelam dengan kepadatan mendekati Pasir yang berdensitas 1600 kg/m^3.<br><br>Apakah Anda tahu? Pasir terbentuk sebagian besar dari kristal erosi berbatuan tetapi juga memiliki sebagian pecahan kerang, pecahan koral dan tinja ikan.</p>';
-				} else if (y > 2000 && y < 2500) {
-					info.innerHTML= '<h2>Beton</h2><img src="densityruler/beton.png"></img><p>Bola tenggelam karena sudah sepadat beton yang berdensitas disekitar 2400 kg/m^3.<br><br>Apakah Anda tahu? Beton tidak sama dengan semen, beton terbentuk dari 15% semen, 65% pasir dan 20% air.</p>';
-				} else if (y > 2500 && y < 2800) {
-					info.innerHTML= '<h2>Aluminium</h2><img src="densityruler/aluminium.jpg"></img><p>Bola tenggelam karena memiliki kepadatan setingkat dengan aluminium dengan densitas mendekati 2700 kg/m^3.<br><br>Apakah Anda tahu? Aluminium adalah logam yang paling melimpah, cukup ringan dan dapat di daur ulang berkali-kali sehinga pemakaiannya pun juga melimpah.</p>';
-				} else if (y > 3200 && y < 3600) {
-					info.innerHTML= '<h2>Berlian</h2><img src="densityruler/berlian.jpeg"></img><p>Bola tenggelam karena memiliki kepadatan setingkat denganberlian yang berdensitas mendekati 3500 kg/m^3.<br><br>Apakah Anda tahu? Cincin berlian pada awalnya bukanlah hal yang wajar dalam pernikahan, konsep cincin berlian pernikahan tersebut berasal dari iklan De Beers sebuah perusahaan berlian pada tahun 1947.</p>';
-				} else if (y > 3600) {
-					info.innerHTML= '<h3>STOP</h3><img src="densityruler/stop.jfif"></img><p>Bola tenggelam dan developer belum bisa menambah fakta-fakta lainnya.<br><br>Apakah Anda tahu? Sebagian besar elemen yang lebih padat dari ini berupa logam (dalam kg/m^3) seperti besi (7870), tembaga (8940), perak (10500), emas (19840) dan osmium (22570) sebagai elemen natural paling padat. <br><b>ps: tidak perlu menambah densitas lagi</b></p>';
-				}
-			}
-		}
+        function bestNeighbor(st, en) {
+            let bestProfit = -Infinity;
+            let bestNeighbor = "";
+            const currentDistance = distance(st, en);
 
-		const db = getDatabase();
-		const dbref = ref(db);
-		const userref = ref(db, 'users/');
+            for (let i = 0; i < Map[st][4]; i++) {
+                const neighbor = Map[st][5 + i];
+                const neighborRow = getRow(neighbor);
 
-		function readUserData(name) {
-			get(child(dbref, 'users/' + name)).then((snapshot) => {
-  				if (snapshot.exists()) {
-    				let key = snapshot.key;
-					let value = snapshot.val();
-					document.getElementById("density").innerHTML = Number(value.density);
-				} else {
-    				console.log("No data available");
-  				}
-			})
-		}
+                if (neighbor === en) {
+                    bestNeighbor = neighbor;
+                    setVisit(neighborRow);
+                    break;
+                } else if (Map[neighborRow][1] === 0) {
+                    const cost = Map[st][9 + i];
+                    const profit = toMeter(currentDistance) - toMeter(distance(neighborRow, en)) - cost;
+                    if (profit > bestProfit) {
+                        bestNeighbor = neighbor;
+                        bestProfit = profit;
+                        setVisit(neighborRow);
+                    }
+                }
+            }
+            return bestNeighbor;
+        }
 
-		function writeUserData(name, density) {
-			set(ref(db, 'users/' + name), {
-				density: density
-			});
-		}
-	</script>
+        function routing(st, en) {
+            const route = [Map[st][0]];
+            let arrived = false;
+            let currentSt = st;
+
+            while (!arrived) {
+                const currentStart = bestNeighbor(currentSt, en);
+                if (!currentStart) {
+                    resetVisit();
+                    route = [];
+                    return "Rute tidak ditemukan";
+                }
+                route.push(currentStart);
+                if (currentStart === Map[en][0]) {
+                    arrived = true;
+                }
+                currentSt = getRow(currentStart);
+            }
+
+            resetVisit();
+            return route;
+        }
+
+        function gety(y){
+            return (Math.abs(y) - 6.9304838) * 445000;
+        }
+
+        function getx(x){
+            return (x - 107.766913) * 443000;
+        }
+
+        const lines = [];
+
+        // Function to draw a line between two points
+        function drawLine(x1, y1, x2, y2) {
+            // Create a new div element for the line
+            const line = document.createElement('div');
+            line.classList.add('line');
+
+            const deltaX = getx(x2) - getx(x1);
+            const deltaY = gety(y2) - gety(y1);
+            const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+            // Set the styles for the new line
+            line.style.width = `${length}px`;
+            line.style.height = '2px'; // Adjust the thickness of the line
+            line.style.left = `${getx(x1)}px`;
+            line.style.top = `${gety(y1)}px`;
+            line.style.transformOrigin = '0 0';
+            line.style.transform = `rotate(${angle}deg)`;
+
+            // Append the new line div to the body
+            document.getElementById('mainContent').appendChild(line);
+
+            // Add the new line to the lines array
+            lines.push(line);
+        }
+
+        // Function to delete all lines
+        function deleteLines() {
+            // Loop through each line and remove it from the DOM
+            lines.forEach(line => {
+                line.remove();
+            });
+
+            // Clear the lines array
+            lines.length = 0;
+        }
+
+        function search(){
+            if (document.getElementById("search").style.visibility == "visible"){
+                closesearch();
+            } else {
+                document.getElementById("search").style.visibility = "visible";
+            }
+        }
+
+        function closesearch(){
+            document.getElementById("search").style.visibility = "hidden";
+        }
+
+        document.getElementById('routeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const startInput = document.getElementById('start').value.toUpperCase();
+            const endInput = document.getElementById('end').value.toUpperCase();
+            const startRow = getRow(startInput);
+            const endRow = getRow(endInput);
+
+            if (startRow === undefined || endRow === undefined) {
+                document.getElementById('route').innerHTML = "Invalid start or end node. Please try again.";
+                return;
+            }
+
+            setVisit(startRow);
+            const route = routing(startRow, endRow);
+            if (route != []) {
+                document.getElementById('route').innerHTML = "Route: " + route;
+                closesearch();
+                for (let i = 1; i < route.length; i++) {
+                    let a = getRow(route[i-1]);
+                    let b = getRow(route[i]);
+                    drawLine(Map[a][3], Map[a][2], Map[b][3], Map[b][2]);
+                }
+            } else {
+                document.getElementById('route').innerHTML = "Route tidak ditemukan.";
+            }
+            route = [];
+        });
+
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === "admin" && password === "123456") {
+                document.getElementById("login").style.visibility = "hidden";
+                document.getElementById("mainContent").style.visibility = "visible";
+            } else {
+                alert("Invalid username or password.");
+            }
+        });
+
+    </script>
 </body>
- 
 </html>
