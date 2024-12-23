@@ -2,10 +2,13 @@
 <html lang="en-us">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITB Map</title>
+    <title>Routing</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+        }
+        label {
+            font-weight: bold;
         }
         input, button {
             margin: 5px;
@@ -20,6 +23,7 @@
             position: absolute;
             visibility: visible;
             flex-direction: column;
+            border: 2px solid red;
         }
         #search {
             visibility: hidden;
@@ -44,8 +48,6 @@
             visibility: hidden;
         }
         #searchbutton{
-            font-weight: bold;
-            color: white;
             background-color: #04AA6D;
             width: 80px;
             height: 80px;
@@ -56,8 +58,8 @@
             border-radius: 50%;
         }
         #button1{
-            left: 617px;
-            top: 1365px;
+            left: calc((107.76832872351034px - 107.766949px) * 450000);
+            top: calc((6.9335823808568735px - 6.9305208px) * 450000);
             position: absolute;
             background-color: #5100ff;
             width: 12px;
@@ -65,8 +67,8 @@
             border-radius: 50%;
         }
         #button2{
-            left: 618px;
-            top: 1308px;
+            left: calc((107.76834111830969px - 107.766949px) * 450000);
+            top: calc((6.933272551920242px - 6.9305208px) * 450000);
             position: absolute;
             background-color: #f100fd;
             width: 12px;
@@ -74,8 +76,8 @@
             border-radius: 50%;
         }
         #button3{
-            left: 708px;
-            top: 1121px;
+            left: calc((107.76844837264261px - 107.766949px) * 450000);
+            top: calc((6.932453923692397px - 6.9305208px) * 450000);
             position: absolute;
             background-color: #abcd67;
             width: 12px;
@@ -94,8 +96,8 @@
         <button id="button2"></button>
         <button id="button3"></button>
         <div id="search">
-        <h3>Masukkan titik awal dan titik akhir rute:</h3>
-        
+            <h3>Masukkan titik awal dan titik akhir rute:</h3> 
+            
             <form id="routeForm">
                 <label for="start">Titik Awal : </label>
                 <input type="text" id="start" placeholder="e.g., B" required>
@@ -109,7 +111,7 @@
         </div>
 	</main>
 
-    <button id="searchbutton" onclick="search()">Search</button>
+    <button id="searchbutton" onclick="search()"></button>
 
 
     <account id="login">
@@ -275,50 +277,82 @@
             return route;
         }
 
-        function gety(y){
-            return (Math.abs(y) - 6.9304838) * 445000;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const mapElement = document.getElementById('mainContent');
+        const marker = document.getElementById('button1');
+        const marker2 = document.getElementById('button2');
+        const marker3 = document.getElementById('button3');
+
+        const mapWidth = 1076;
+        const mapHeight = 1522;
+
+        const minLongitude = -7.127158607046327; 
+        const maxLongitude = -6.790189159941308;    
+        const maxLatitude = 107.76798208424221;
+        const minLatitude = 107.77134825414308; 
+
+        const longitude = -6.933584517173751;  
+        const latitude = 107.76832917329023;   
+        const longitude2 = -6.933271284479303; 
+        const latitude2 = 107.76834012954798;  
+        const longitude3 = -6.9318074762661785; 
+        const latitude3 = 107.76886909099147;  
+
+        const x = longitudeToX(longitude, mapWidth, minLongitude, maxLongitude);
+        const y = latitudeToY(latitude, mapHeight, minLatitude, maxLatitude);
+
+        const x2 = longitudeToX(longitude2, mapWidth, minLongitude, maxLongitude);
+        const y2 = latitudeToY(latitude2, mapHeight, minLatitude, maxLatitude);
+
+        const x3 = longitudeToX(longitude3, mapWidth, minLongitude, maxLongitude);
+        const y3 = latitudeToY(latitude3, mapHeight, minLatitude, maxLatitude);
+
+        marker.style.left = `${x}px`;
+        marker.style.top = `${y}px`;
+        marker2.style.left = `${x2}px`;
+        marker2.style.top = `${y2}px`;
+        marker3.style.left = `${x3}px`;
+        marker3.style.top = `${y3}px`;
+
+        function longitudeToX(longitude, mapWidth, minLon, maxLon) {
+            return ((longitude - minLon) / (maxLon - minLon)) * mapWidth;
         }
 
-        function getx(x){
-            return (x - 107.766913) * 443000;
+        function latitudeToY(latitude, mapHeight, minLat, maxLat) {
+            return mapHeight - ((maxLat - latitude) / (maxLat - minLat)) * mapHeight;
         }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         const lines = [];
 
-        // Function to draw a line between two points
         function drawLine(x1, y1, x2, y2) {
-            // Create a new div element for the line
             const line = document.createElement('div');
             line.classList.add('line');
 
-            const deltaX = getx(x2) - getx(x1);
-            const deltaY = gety(y2) - gety(y1);
+            const deltaX = longitudeToX(x2) - longitudeToX(x1);
+            const deltaY = latitudeToY(y2) - latitudeToY(y1);
             const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
             const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 
-            // Set the styles for the new line
             line.style.width = `${length}px`;
-            line.style.height = '2px'; // Adjust the thickness of the line
+            line.style.height = '2px';
             line.style.left = `${getx(x1)}px`;
             line.style.top = `${gety(y1)}px`;
             line.style.transformOrigin = '0 0';
             line.style.transform = `rotate(${angle}deg)`;
 
-            // Append the new line div to the body
-            document.getElementById('mainContent').appendChild(line);
+            document.body.appendChild(line);
 
-            // Add the new line to the lines array
             lines.push(line);
         }
 
-        // Function to delete all lines
         function deleteLines() {
-            // Loop through each line and remove it from the DOM
             lines.forEach(line => {
                 line.remove();
             });
 
-            // Clear the lines array
             lines.length = 0;
         }
 
@@ -336,6 +370,7 @@
 
         document.getElementById('routeForm').addEventListener('submit', function(event) {
             event.preventDefault();
+            deleteLines();
             
             const startInput = document.getElementById('start').value.toUpperCase();
             const endInput = document.getElementById('end').value.toUpperCase();
@@ -376,7 +411,6 @@
                 alert("Invalid username or password.");
             }
         });
-
     </script>
 </body>
 </html>
